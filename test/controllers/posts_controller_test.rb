@@ -6,44 +6,35 @@ class PostsControllerTest < ActionController::TestCase
     @user = users(:user_1)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:posts)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create post" do
-    assert_difference('Post.count') do
-      post :create, post: { comment: @post.comment, user_id:@user.id }
+  # test "usuario crea post" do
+  #   sign_in @user
+  #   assert_difference('Post.count') do
+  #     post :create, post: { comment: @post.comment }
+  #   end
+  #   assert_redirected_to root_path
+  # end
+  test "anonimo no puede crear post" do
+    assert_no_difference('Post.count') do
+      post :create, post: { comment: @post.comment, user_id: 1 }
     end
-    assert_redirected_to post_path(assigns(:post))
+    assert_redirected_to signin_path
+  end
+  # test "usuario borra sus posts" do
+  #   sign_in @user
+  #   post_mio = @user.posts.create(comment: "comentario")
+  #   assert_difference('Post.count', -1) do
+  #     delete :destroy, id: post_mio
+  #   end
+  #   assert_redirected_to root_path
+  # end
+  # test "usuario no puede borrar posts ajenos" do
+  #   sign_in @user
+  #   delete :destroy, id: @post
+  #   assert_redirected_to root_path
+  # end
+  test "anonimo no puede borrar posts" do
+    delete :destroy, id: @post
+    assert_redirected_to signin_path
   end
 
-  test "should show post" do
-    get :show, id: @post
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @post
-    assert_response :success
-  end
-
-  test "should update post" do
-    patch :update, id: @post, post: { comment: @post.comment }
-    assert_redirected_to post_path(assigns(:post))
-  end
-
-  test "should destroy post" do
-    assert_difference('Post.count', -1) do
-      delete :destroy, id: @post
-    end
-
-    assert_redirected_to posts_path
-  end
 end

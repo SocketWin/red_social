@@ -8,7 +8,7 @@ namespace :db do
     User.create!(name: "Usuario",
     surname: "Pruebas",
     sex: "Indefinido",
-    login: "LoginUser",
+    login: "login",
     email: "user@gmail.com",
     password: "contraseña",
     password_confirmation: "contraseña")

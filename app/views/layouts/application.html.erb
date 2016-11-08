@@ -7,11 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render 'layouts/header' %>
-  <div class="container">
-    <%= yield %>
-    <%= render 'layouts/footer' %>
-  </div>
-  <%= debug(params) if Rails.env.development? %>
+<%= render 'layouts/header' %>
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<div class="container">
+  <%= yield %>
+  <%= render 'layouts/footer' %>
+</div>
+<%= debug(params) if Rails.env.development? %>
 </body>
 </html>

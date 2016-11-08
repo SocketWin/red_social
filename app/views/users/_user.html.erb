@@ -1,5 +1,10 @@
 <li>
-  <%= link_to user.login, user_url(user) %>
-  <%= image_tag user.image, alt: "avatar", class: "avatar" %>
-  <%= image_tag("#{user.sex}.png", alt: "sexo") %></br>
+  <%= image_tag(user.image, alt: "avatar", class: "avatar_p") %>
+  <%= link_to user.login, user %>
+  <% if current_user.admin? && !current_user?(user) %>
+      | <%= link_to "Eliminar", user, method: :delete,
+                    data: { confirm: "¿Estas seguro de querer borrar a #{user.name} #{user.surname}?"} %>
+  <% end %>
+  <br>
+  <%= image_tag("#{user.sex}.png", alt: "sexo") %>
 </li>

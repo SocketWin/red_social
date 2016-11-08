@@ -4,12 +4,26 @@
       <%= link_to image_tag("austrosoftancho.png", alt: "AustroSoft"), '#', id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <!-- <li class= "nav_button"><%= link_to "Home", '#' %></li>
-          <li class= "nav_button"><%= link_to "Help", '#' %></li>
-          <li class= "nav_button"><%= link_to "Sign in", '#' %></li> -->
           <li class= "nav_button"><%= link_to "<i class=\"icon-home\"></i> Home".html_safe, root_path %></li>
           <li class= "nav_button"><%= link_to "<i class=\"icon-info-sign\"></i> Help".html_safe, help_path %></li>
-          <li class= "nav_button"><%= link_to "<i class=\"icon-user\"></i> Sign in".html_safe, '#'%></li>
+          <% if signed_in? %>
+              <li class= "nav_button"><%= link_to "<i class=\"icon-globe\"></i> Usuarios".html_safe, users_path %></li>
+              <li id="fat-menu" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="icon-wrench"></i> Cuenta <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "<i class=\"icon-user\"></i> Perfil".html_safe, current_user %></li>
+                  <li><%= link_to "<i class=\"icon-cog\"></i> Configuración".html_safe, edit_user_path(current_user) %></li>
+                  <li class="divider"></li>
+                  <li>
+                    <%= link_to "<i class=\"icon-off\"></i> Cerrar sesión".html_safe, signout_path, method: "delete" %>
+                  </li>
+                </ul>
+              </li>
+          <% else %>
+              <li><%= link_to "<i class=\"icon-circle-arrow-up\"></i> Identificarse".html_safe, signin_path %></li>
+          <% end %>
         </ul>
       </nav>
     </div>

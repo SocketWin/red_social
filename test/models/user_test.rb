@@ -28,6 +28,8 @@ class UserTest < ActiveSupport::TestCase
 		assert_respond_to user, "sex"
 		assert_respond_to user, "image"
 		assert_respond_to user, "posts"
+		assert_respond_to user, "remember_token"
+		assert_respond_to user, "authenticate"
 	end
 	test "Comprobar atributos que deben estar inicializados" do
 		user = User.new
@@ -77,4 +79,16 @@ class UserTest < ActiveSupport::TestCase
 		user.email = "Email_No_Registrado"
 		refute user.save, "No se pueden guardar dos usuarios con el mismo login"
 	end
+
+	test "Comprobar que cuando guardamos un usuario se crea un remember_token" do
+		user = User.last.dup
+		user.remember_token = nil
+		user.password = "password"
+		user.password_confirmation = "password"
+		user.email = "Email_No_Registrado"
+		user.login = "Login_No_Registrado"
+		user.save
+		refute_nil user.remember_token
+	end
+
 end
