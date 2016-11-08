@@ -1,0 +1,23 @@
+<% provide(:title,@user.login) %>
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= image_tag(@user.image, alt: "avatar", class: "avatar") %>
+        <%= @user.name %></br>
+        <%= @user.surname %></br>
+        <%= image_tag("#{@user.sex}.png", alt: "sexo") %></br>
+      </h1>
+    </section>
+  </aside>
+  <div class="span8">
+    <% if @user.posts.any? %>
+    <h3>Posts (<%= @user.posts.count %>)</h3>
+    <ol class="posts">
+      <%= render @posts %>
+    </ol>
+    <%= will_paginate @posts %>
+    <% end %>
+  </div>
+</div>

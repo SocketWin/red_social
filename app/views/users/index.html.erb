@@ -1,0 +1,20 @@
+<% provide(:title, "Usuarios") %>
+<p id="notice"><%= notice %></p>
+
+<h1>Usuarios</h1>
+<div class="row">
+  <div class="span8">
+    <% if @users.any? %>
+    <h3>Usuarios (<%= @users.count %>)</h3>
+    <%= will_paginate @users %>
+    <ul class="users">
+      <%= render @users %>
+    </ul>
+    <%= will_paginate @users %>
+    <% end %>
+  </div>
+</div>
+
+<br>
+
+<%= link_to 'Nuevo Usuario', new_user_path %>

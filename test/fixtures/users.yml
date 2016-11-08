@@ -1,0 +1,12 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<% 50.times do |n| %>
+user_<%= n+1 %>:
+ id: <%= n+1 %>
+ name: <%= "user#{n+1}" %>
+ surname: <%= "surname#{n+1}" %>
+ password_digest: $2a$10$4LEA7r4YmNHtvlAvHhsYAeZmk/xeUVtMTYqwIvYY76EW5GUqDiP4.
+ email: <%= "user#{n+1}@gmail.com" %>
+ login: <%= "user#{n+1}surname#{n}" %>
+ sex: Indefinido
+ image: imagen_defecto.png
+<% end %>

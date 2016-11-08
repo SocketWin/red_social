@@ -1,0 +1,52 @@
+# http://edgeguides.rubyonrails.org/active_record_migrations.html#schema-dumping-and-you
+#schema_search_path: "schema_particular"
+#schema_search_path: "schema"
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: mysql2
+#  adapter: sqlite3
+  encoding: utf8
+  username: root
+#  password: austro1992
+  password: asadmin1983
+#  host: 127.0.0.1
+  host: 192.168.1.254
+  port: 3306
+
+#empresa_signum: &default
+#  adapter: mysql2
+#  encoding: utf8
+#  database: signum
+#  username: root
+#  password: austro1992
+#  host: 127.0.0.1
+#  port: 3306
+
+
+#default: &default
+#  adapter: sqlite3
+#  pool: 5
+#  timeout: 5000
+#
+development:
+  <<: *default
+  database: signum
+#  database: bdkanibales2015
+#  database: db/desarrollo.sqlite3
+#  database: db/particular.sqlite3
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  <<: *default
+  database: db/production.sqlite3

@@ -1,0 +1,17 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to image_tag("austrosoftancho.png", alt: "AustroSoft"), '#', id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <!-- <li class= "nav_button"><%= link_to "Home", '#' %></li>
+          <li class= "nav_button"><%= link_to "Help", '#' %></li>
+          <li class= "nav_button"><%= link_to "Sign in", '#' %></li> -->
+          <li class= "nav_button"><%= link_to "<i class=\"icon-home\"></i> Home".html_safe, root_path %></li>
+          <li class= "nav_button"><%= link_to "<i class=\"icon-info-sign\"></i> Help".html_safe, help_path %></li>
+          <li class= "nav_button"><%= link_to "<i class=\"icon-user\"></i> Sign in".html_safe, '#'%></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

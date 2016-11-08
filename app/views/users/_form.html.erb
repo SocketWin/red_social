@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="offset3">
+    <%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <div class="control-group">
+      <%= f.label :name, "Nombre", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :surname, "Apellidos", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :surname %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :password, "Contraseña", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :password_confirmation, "Confirmación", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :email, "E-mail", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.email_field :email %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :login, "Login", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :login %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :sex , "Sex", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select :sex, options_for_select([["No definido","Indefinido"],["Hombre","Hombre"],["Mujer","Mujer"]]) %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :image, "Image", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.file_field :image %></br></br>
+        <%= f.submit "Crear cuenta", class: "btn btn-primary" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
