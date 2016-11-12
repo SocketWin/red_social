@@ -3,12 +3,7 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <h1>
-        <%= image_tag(@user.image, alt: "avatar", class: "avatar") %>
-        <%= @user.name %></br>
-        <%= @user.surname %></br>
-        <%= image_tag("#{@user.sex}.png", alt: "sexo") %></br>
-      </h1>
+      <%= render 'shared/user_info', object: @user %>
     </section>
   </aside>
   <div class="span8">

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:create, :destroy]
 
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.

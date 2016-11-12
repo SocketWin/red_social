@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 	def validate_password?
 		password.present? || password_confirmation.present?
 	end
-	validates :password, presence: true, length: { minimum: 6, if: :validate_password? }
+	validates :password, presence: true, length: { minimum: 6, if: :validate_password? }, on: :create
 	validates :sex, presence: true, inclusion: {in: %w(Hombre Mujer Indefinido)}
 	after_initialize {
 		self.sex = "Indefinido" if self.sex.blank?

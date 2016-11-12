@@ -3,12 +3,21 @@
     <div class="row">
       <aside class="span4">
         <section>
-          <%= render 'shared/user_info', object: @user %>
+          <%= render 'shared/user_info', object: current_user %>
         </section>
         <section>
           <%= render 'shared/post_form' %>
         </section>
       </aside>
+      <div class="span8">
+        <h1>Últimos posts</h1>
+        <% if @feed_posts.any? %>
+            <ol class="posts">
+              <%= render partial: 'shared/feed_post', collection: @feed_posts %>
+            </ol>
+            <%= will_paginate @feed_posts %>
+        <% end %>
+      </div>
     </div>
 <% else %>
     <div class="center hero-unit">

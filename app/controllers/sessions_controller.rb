@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
     user = User.find_by(login: session_params[:login])
     if (user && user.authenticate(session_params[:password]))
       sign_in user
-      redirect_back_or user
+      # redirect_back_or user
+      redirect_to root_path
     else
       flash[:error] = 'Fallo de autenticación: Los datos son incorrectos'
       render action: 'new'
