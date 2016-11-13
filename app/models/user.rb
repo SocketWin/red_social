@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 	# has_many :followed_users, foreign_key: "follower_id", class_name: "Relationship", dependent: :destroy
 	has_many :followed_users, through: :relationships, class_name: "User", source: :followed_users
 	# has_many :followed_users, foreign_key: "follower_id", class_name: Relationship
+	has_many :followers, through: :relationships, class_name: "User", source: :followers
 	validates :name, :surname, presence: true
 	validates :email, :login, presence: true, uniqueness: true
 	has_secure_password

@@ -1,0 +1,17 @@
+<li id="<%= feed_post.id %>">
+<span class="user">
+<%= image_tag(feed_post.user.image, alt: "avatar", class: "avatar_p") %>
+  <%= link_to feed_post.user.login, feed_post.user %>
+</span>
+  <span class="content"><%= feed_post.comment %></span>
+  <span class="timestamp">
+Posted <%= time_ago_in_words(feed_post.created_at) %> ago.
+</span>
+  <span class="timestamp">
+Posted <%= time_ago_in_words(feed_post.created_at) %> ago.
+    <% if current_user?(feed_post.user) %>
+<%= link_to "Eliminar <i class=\"icon-remove-sign\"></i>".html_safe, feed_post,
+            method: :delete, data: { confirm: "¿Estás seguro?" } %>
+<% end %>
+</span>
+</li>

@@ -77,6 +77,8 @@ class UsersControllerTest < ActionController::TestCase
       end
     end
     assert_select "div.pagination"
+    assert_select "a[href=?]",following_user_path(@user), /#{@user.followed_users.count}*following/
+    assert_select "a[href=?]",followers_user_path(@user), /#{@user.followers.count}*followers/
   end
 
   test "should update user" do
@@ -125,7 +127,7 @@ class UsersControllerTest < ActionController::TestCase
   test "user not admin should not destroy user" do
     sign_in @user
     delete :destroy, id: @user
-    assert_redirected_to signin_path
+    assert_redirected_to root_path
   end
   test "user not signed should not destroy user" do
     delete :destroy, id: @user
@@ -137,7 +139,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_in @user
     get :index
     # assert_not_nil assigns(:users)
-    assert_response :found
+    assert_response :success
     # assert_select "title", /Usuarios/
     # assert_select "ul[class=\"users\"]" do
     #   User.all.paginate(page:1).each do |user|
@@ -150,6 +152,44 @@ class UsersControllerTest < ActionController::TestCase
     #   end
     # end
     # assert_select "div.pagination", 2
+  end
+
+  test "should get following" do
+    sign_in @user
+    get :following, id: @user
+    assert_response :success
+    assert_select "title", /#{@user.login} followed users/
+    assert_select "body", /#{@user.name}/
+    assert_select "body", /#{@user.surname}/
+    assert_select "img[src=?]", "/assets/#{@user.image}"
+    assert_select "img[src=?]", "/assets/#{@user.sex}.png"
+    assert_select "ul[class=\"users\"]" do
+      @user.followed_users.paginate(page:1).each do |user|
+        assert_select "li", /#{user.login}/
+      end
+    end
+    assert_select "div.pagination" if @user.followed_users.count > 30
+    assert_select "a[href=?]",following_user_path(@user), /#{@user.followed_users.count}*following/
+    assert_select "a[href=?]",followers_user_path(@user), /#{@user.followers.count}*followers/
+  end
+
+  test "should get followers" do
+    sign_in @user
+    get :followers, id: @user
+    assert_response :success
+    assert_select "title", /#{@user.login} followers/
+    assert_select "body", /#{@user.name}/
+    assert_select "body", /#{@user.surname}/
+    assert_select "img[src=?]", "/assets/#{@user.image}"
+    assert_select "img[src=?]", "/assets/#{@user.sex}.png"
+    assert_select "ul[class=\"users\"]" do
+      @user.followers.paginate(page:1).each do |user|
+        assert_select "li", /#{user.login}/
+      end
+    end
+    assert_select "div.pagination" if @user.followers.count > 30
+    assert_select "a[href=?]",following_user_path(@user), /#{@user.followed_users.count}*following/
+    assert_select "a[href=?]",followers_user_path(@user), /#{@user.followers.count}*followers/
   end
 
 end

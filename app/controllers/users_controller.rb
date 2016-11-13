@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :following, :followers]
   before_action :signed_in_user, only: [:index, :edit,:update, :destroy]
-  before_action :correct_user, only: [:edit,:update]
+  before_action :correct_user, only: [:edit,:update, :destroy]
   before_action :admin_user, only: :destroy
+  before_action :signed_in_user, only: [:index, :edit,:update, :destroy, :following, :followers]
 
   # GET /users
   # GET /users.json
@@ -65,6 +66,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def following
+    @title = " followed users"
+    @users = @user.followed_users.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = " followers"
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -72,8 +85,8 @@ class UsersController < ApplicationController
     end
 
     def correct_user
-      redirect_to root_url, notice: "Has sido redirigido por no tener los permisos adecuados" unless
-          current_user? @user
+      @post = current_user.posts.find_by(id: params[:id])
+      redirect_to root_url if @post.nil?
     end
 
     def admin_user
