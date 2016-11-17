@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
   resources :sessions, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 
   resources :users do
     member do

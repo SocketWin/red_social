@@ -21,3 +21,5 @@
     </a>
   </div>
 </section>
+<br>
+<%= render 'users/follow' if signed_in? && @user && current_user != @user %>
