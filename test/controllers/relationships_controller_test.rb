@@ -5,7 +5,7 @@ class RelationshipsControllerTest < ActionController::TestCase
   #   assert true
   # end
   setup do
-    @user = users(:one)
+    @user = users(:user_1)
   end
   test "should create relationship" do
 

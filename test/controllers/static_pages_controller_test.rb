@@ -66,8 +66,7 @@ class StaticPagesControllerTest < ActionController::TestCase
     get :home
     assert_response :success
     assert_select "title", "Red Social | Home"
-    assert_select "a[href=?]",following_user_path(current_user), /
-    #{current_user.followed_users.count}*following/
+    assert_select "a[href=?]",following_user_path(current_user), /#{current_user.followed_users.count}*following/
     assert_select "a[href=?]",followers_user_path(current_user), /#{current_user.followers.count}*followers/
     # assert_select "body", /#{current_user.name}/
     # assert_select "body", /#{current_user.surname}/
